@@ -6,9 +6,8 @@ This repository is a collection of projects to improve my JavaScript skills and 
 
 Each project will have its own folder and will follow a similar structure:
 
-```
-project-name/
-  ├── index.html
-  ├── style.css
-  └── index.js
-```
+📂 project-name <br />
+  
+  ├── 📜 index.html <br />
+  ├── 📜 style.css <br />
+  └── 📜 index.js <br />
