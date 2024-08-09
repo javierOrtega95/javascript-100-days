@@ -1,0 +1,142 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #e5e5e5;
+  user-select: none;
+}
+
+.iphone {
+  display: flex;
+  width: 320px;
+  height: 640px;
+  background: url('./images/iphone.webp');
+  background-size: contain;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+}
+
+.display {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  width: 100%;
+  background: #f6f6f6;
+  border-radius: 32px;
+  padding: 16px 6px;
+  margin: 24px;
+  overflow: hidden;
+
+  header {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .cards {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+
+    article {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      cursor: grab;
+      inset: 0;
+      overflow: hidden;
+      z-index: 2;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      h2 {
+        position: absolute;
+        display: flex;
+        align-items: flex-end;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to top, #00000088 20%, transparent 40%);
+        color: white;
+        inset: 0;
+        padding: 16px;
+        z-index: 3;
+
+        span {
+          margin-left: 6px;
+          font-size: 18px;
+          line-height: 1.4;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  footer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 0 24px;
+
+    button {
+      background: url('./images/tinder-icons.webp') no-repeat;
+      background-position: 0px 0px;
+      background-size: 175px;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      border: 0;
+      cursor: pointer;
+      transition: scale 0.3s ease;
+
+      &:hover {
+        scale: 1.2;
+      }
+
+      &.big {
+        width: 48px;
+        height: 48px;
+        background-size: 250px;
+      }
+
+      &.undo {
+        background-position: -140px 0;
+      }
+
+      &.dislike {
+        background-position: -151px 0;
+      }
+
+      &.superlike {
+        background-position: -69px 0;
+      }
+
+      &.like {
+        background-position: -46px 0px;
+      }
+    }
+  }
+}
