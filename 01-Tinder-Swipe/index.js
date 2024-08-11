@@ -3,7 +3,10 @@ document.addEventListener('mousedown', onDrag)
 document.addEventListener('touchstart', onDrag, { passive: true })
 
 let isDragging = false
+let dragOffsetX = 0
+
 const ROTATION_FACTOR = 15
+const DECISION_THRESHOLD = 75
 
 function onDrag(event) {
   if (isDragging) return
@@ -19,7 +22,7 @@ function onDrag(event) {
 
   function onMove(event) {
     const currentX = event.pageX ?? event.touches[0].pageX
-    const dragOffsetX = currentX - startX
+    dragOffsetX = currentX - startX
 
     // exit if there's no horizontal movement
     if (dragOffsetX === 0) return
@@ -35,6 +38,26 @@ function onDrag(event) {
 
   function onMoveEnd(event) {
     removeDragEventListeners()
+
+    const hasDecided = Math.abs(dragOffsetX) >= DECISION_THRESHOLD
+
+    if (hasDecided) {
+      const isLike = dragOffsetX > 0
+
+      currentCard.classList.add(isLike ? 'go-right' : 'go-left')
+      document.addEventListener('transitionend', () => currentCard.remove())
+    } else {
+      currentCard.classList.add('reset')
+      currentCard.classList.remove('go-right', 'go-left')
+    }
+
+    document.addEventListener('transitionend', () => {
+      currentCard.removeAttribute('style')
+      currentCard.classList.remove('reset')
+
+      dragOffsetX = 0
+      isDragging = false
+    })
   }
 
   function addDragEventListeners() {
