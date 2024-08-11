@@ -54,6 +54,16 @@ body {
     height: 100%;
     margin: 0 auto;
 
+    & .no-cards {
+      display: grid;
+      place-content: center;
+      color: #777;
+      font-size: 14px;
+      text-align: center;
+      height: 100%;
+      z-index: -1;
+    }
+
     .card {
       position: absolute;
       width: 100%;
