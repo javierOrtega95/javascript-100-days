@@ -34,21 +34,35 @@ function onDrag(event) {
     // apply the transformation to the card
     currentCard.style.transform = `translateX(${dragOffsetX}px) rotate(${rotationDegrees}deg)`
     currentCard.style.cursor = 'grabbing'
+
+    const goRight = dragOffsetX > 0
+
+    const choiceElement = goRight
+      ? currentCard.querySelector('.choice.like')
+      : currentCard.querySelector('.choice.nope')
+
+    // change opacity of the choice info
+    const opacity = Math.abs(dragOffsetX) / 100
+    choiceElement.style.opacity = opacity
   }
 
-  function onMoveEnd(event) {
+  function onMoveEnd() {
     removeDragEventListeners()
 
     const hasDecided = Math.abs(dragOffsetX) >= DECISION_THRESHOLD
 
     if (hasDecided) {
-      const isLike = dragOffsetX > 0
+      const goRight = dragOffsetX > 0
 
-      currentCard.classList.add(isLike ? 'go-right' : 'go-left')
+      currentCard.classList.add(goRight ? 'go-right' : 'go-left')
       document.addEventListener('transitionend', () => currentCard.remove())
     } else {
       currentCard.classList.add('reset')
       currentCard.classList.remove('go-right', 'go-left')
+
+      currentCard.querySelectorAll('.choice').forEach((choice) => {
+        choice.style.opacity = 0
+      })
     }
 
     document.addEventListener('transitionend', () => {
