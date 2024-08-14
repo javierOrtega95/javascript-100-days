@@ -7,7 +7,11 @@ This repository is a collection of projects to improve my JavaScript skills and 
 Each project will have its own folder and will follow a similar structure:
 
 📂 project-name <br />
-  
-  ├── 📜 index.html <br />
-  ├── 📜 style.css <br />
-  └── 📜 index.js <br />
+
+├── 📜 index.html <br />
+├── 📜 style.css <br />
+└── 📜 index.js <br />
+
+## Projects
+
+1. [Tinder Swipe](./01-Tinder-Swipe/)
