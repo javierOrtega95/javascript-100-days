@@ -9,14 +9,32 @@
 body {
   display: grid;
   place-content: center;
-  background-color: #f0f0f0;
+  background: #080808;
   min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+
+  .title {
+    width: 220px;
+    height: 50px;
+    background: url('./images/sprite.png') no-repeat;
+    background-position: 0px -4px;
+  }
 }
 
 canvas {
   display: block;
   background: url('./images/bkg.png') repeat;
-  border: 1px solid #000;
+  border: 2px solid #f81858;
   border-bottom: transparent;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
 }
