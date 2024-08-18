@@ -79,6 +79,8 @@ export default class Game {
       this.ball.draw()
       this.drawBricks()
 
+      this.paddle.move()
+
       window.requestAnimationFrame(draw)
     }
 
