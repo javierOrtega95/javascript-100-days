@@ -7,15 +7,17 @@ export default class Game {
     this.canvas = document.querySelector('canvas')
     this.ctx = this.canvas.getContext('2d')
 
-    this.canvas.width = 800
-    this.canvas.height = 600
+    this.canvas.width = 448
+    this.canvas.height = 400
+
+    this.fps = 60
 
     this.paddle = new Paddle(this)
     this.ball = new Ball(this)
 
     // brick settings
-    this.brickRowCount = 8
-    this.brickColumnCount = 24
+    this.brickRowCount = 6
+    this.brickColumnCount = 13
     this.brickWidth = 32
     this.brickHeight = 16
     this.brickPadding = 0
@@ -72,7 +74,25 @@ export default class Game {
   }
 
   start() {
+    let lastFrameTime = window.performance.now()
+    let nextFPSUpdateTime = window.performance.now() + 1000
+    const timePerFrame = 1000 / this.fps
+
     const draw = () => {
+      window.requestAnimationFrame(draw)
+
+      const currentTime = window.performance.now()
+      const elapsedTime = currentTime - lastFrameTime
+
+      if (elapsedTime < timePerFrame) return
+
+      const excessTime = elapsedTime % timePerFrame
+      lastFrameTime = currentTime - excessTime
+
+      if (nextFPSUpdateTime < currentTime) {
+        nextFPSUpdateTime = window.performance.now() + 1000
+      }
+
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
       this.paddle.draw()
@@ -80,8 +100,7 @@ export default class Game {
       this.drawBricks()
 
       this.paddle.move()
-
-      window.requestAnimationFrame(draw)
+      this.ball.move()
     }
 
     draw()
