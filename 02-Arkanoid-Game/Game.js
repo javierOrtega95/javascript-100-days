@@ -12,6 +12,8 @@ export default class Game {
 
     this.fps = 60
 
+    this.isGameOver = false
+
     this.paddle = new Paddle(this)
     this.ball = new Ball(this)
 
@@ -73,12 +75,20 @@ export default class Game {
     }
   }
 
+  gameOver() {
+    if (!this.isGameOver) {
+      this.isGameOver = true
+      document.location.reload()
+    }
+  }
+
   start() {
     let lastFrameTime = window.performance.now()
-    let nextFPSUpdateTime = window.performance.now() + 1000
     const timePerFrame = 1000 / this.fps
 
     const draw = () => {
+      if (this.isGameOver) return
+
       window.requestAnimationFrame(draw)
 
       const currentTime = window.performance.now()
@@ -88,10 +98,6 @@ export default class Game {
 
       const excessTime = elapsedTime % timePerFrame
       lastFrameTime = currentTime - excessTime
-
-      if (nextFPSUpdateTime < currentTime) {
-        nextFPSUpdateTime = window.performance.now() + 1000
-      }
 
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 

@@ -52,9 +52,19 @@ export default class Ball {
     }
   }
 
+  checkGameOver() {
+    const { y, radius } = this
+    const { canvas } = this.game
+
+    if (y + radius > canvas.height) {
+      this.game.gameOver()
+    }
+  }
+
   move() {
     this.checkWallCollision()
     this.checkPaddleCollision()
+    this.checkGameOver()
 
     this.x += this.speedX
     this.y += this.speedY
