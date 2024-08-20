@@ -18,7 +18,44 @@ export default class Ball {
     this.game.ctx.closePath()
   }
 
+  checkWallCollision() {
+    const { x, y, speedX, speedY, game, radius } = this
+
+    // right wall
+    if (x + radius + speedX > game.canvas.width) {
+      this.speedX = -speedX
+    }
+
+    // left wall
+    if (x - radius + speedX < 0) {
+      this.speedX = -speedX
+    }
+
+    // top wall
+    if (y - radius + speedY < 0) {
+      this.speedY = -speedY
+    }
+  }
+
+  checkPaddleCollision() {
+    const { x, y, radius } = this
+    const { paddle } = this.game
+
+    // check if the ball is within the horizontal bounds of the paddle
+    const withinPaddleWidth = x > paddle.x && x < paddle.x + paddle.width
+    const touchingPaddleTop = y + radius >= paddle.y
+
+    if (withinPaddleWidth && touchingPaddleTop) {
+      this.speedY = -this.speedY
+      // adjust the position to prevent the ball from sticking to the paddle
+      this.y = paddle.y - radius
+    }
+  }
+
   move() {
+    this.checkWallCollision()
+    this.checkPaddleCollision()
+
     this.x += this.speedX
     this.y += this.speedY
   }
