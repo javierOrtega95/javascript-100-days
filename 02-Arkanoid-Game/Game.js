@@ -1,5 +1,5 @@
 import Ball from './Ball.js'
-import Brick from './Brick.js'
+import Brick, { BRICK_STATUS } from './Brick.js'
 import Paddle from './Paddle.js'
 
 export default class Game {
@@ -66,11 +66,13 @@ export default class Game {
 
     for (let column = 0; column < brickColumnCount; column++) {
       for (let row = 0; row < brickRowCount; row++) {
-        const currentBrick = this.bricks[column][row]
+        const brick = this.bricks[column][row]
 
-        const clipX = currentBrick.color * brickWidth
+        if (brick.status === BRICK_STATUS.DESTROYED) continue
 
-        currentBrick.draw(clipX)
+        const clipX = brick.color * brickWidth
+
+        brick.draw(clipX)
       }
     }
   }

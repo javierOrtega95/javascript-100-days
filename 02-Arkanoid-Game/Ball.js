@@ -1,3 +1,5 @@
+import { BRICK_STATUS } from './Brick.js'
+
 export default class Ball {
   constructor(game) {
     this.game = game
@@ -52,6 +54,32 @@ export default class Ball {
     }
   }
 
+  checkBrickCollision() {
+    const { x, y, radius } = this
+    const { bricks } = this.game
+
+    for (let column = 0; column < bricks.length; column++) {
+      for (let row = 0; row < bricks[column].length; row++) {
+        const brick = bricks[column][row]
+
+        if (brick.status === BRICK_STATUS.DESTROYED) continue
+
+        // Check if the ball is within the horizontal bounds of the brick
+        const withinBrickWidth =
+          x + radius > brick.x && x - radius < brick.x + brick.width
+
+        // Check if the ball is within the vertical bounds of the brick
+        const withinBrickHeight =
+          y + radius > brick.y && y - radius < brick.y + brick.height
+
+        if (withinBrickWidth && withinBrickHeight) {
+          this.speedY = -this.speedY
+          brick.status = BRICK_STATUS.DESTROYED
+        }
+      }
+    }
+  }
+
   checkGameOver() {
     const { y, radius } = this
     const { canvas } = this.game
@@ -64,6 +92,8 @@ export default class Ball {
   move() {
     this.checkWallCollision()
     this.checkPaddleCollision()
+    this.checkBrickCollision()
+
     this.checkGameOver()
 
     this.x += this.speedX
