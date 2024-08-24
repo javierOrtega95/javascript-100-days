@@ -13,6 +13,7 @@ export default class Game {
     this.fps = 60
 
     this.isGameOver = false
+    this.isGameWon = false
 
     this.paddle = new Paddle(this)
     this.ball = new Ball(this)
@@ -77,9 +78,22 @@ export default class Game {
     }
   }
 
+  checkWinner() {
+    const allBricksDestroyed = this.bricks.every((column) =>
+      column.every((brick) => brick.status === BRICK_STATUS.DESTROYED)
+    )
+
+    if (allBricksDestroyed && !this.isGameWon) {
+      this.isGameWon = true
+      alert('Congratulations! You won!')
+      document.location.reload()
+    }
+  }
+
   gameOver() {
     if (!this.isGameOver) {
       this.isGameOver = true
+      alert('Game Over! You lost.')
       document.location.reload()
     }
   }
@@ -89,7 +103,7 @@ export default class Game {
     const timePerFrame = 1000 / this.fps
 
     const draw = () => {
-      if (this.isGameOver) return
+      if (this.isGameOver || this.isGameWon) return
 
       window.requestAnimationFrame(draw)
 
@@ -109,6 +123,8 @@ export default class Game {
 
       this.paddle.move()
       this.ball.move()
+
+      this.checkWinner()
     }
 
     draw()
