@@ -13,6 +13,8 @@ export default class Game {
     this.fps = 60
     this.currentFPS = 0
 
+    this.score = 0
+
     this.isGameOver = false
     this.isGameWon = false
 
@@ -100,9 +102,23 @@ export default class Game {
   }
 
   drawUI() {
-    this.ctx.font = '12px Arial'
+    // save the current context state
+    this.ctx.save()
+
+    // draw FPS
+    this.ctx.font = '10px "Press Start 2P", cursive'
+    this.ctx.fillStyle = '#0f0'
+    this.ctx.textAlign = 'left'
+    this.ctx.fillText(`${this.currentFPS} fps`, 10, 20)
+
+    // Draw Score
+    this.ctx.font = 'bold 16px Arial'
     this.ctx.fillStyle = '#fff'
-    this.ctx.fillText(`FPS: ${this.currentFPS}`, 5, 20)
+    this.ctx.textAlign = 'right'
+    this.ctx.fillText(`Score: ${this.score}`, this.canvas.width - 10, 20)
+
+    // restore the context state
+    this.ctx.restore()
   }
 
   start() {

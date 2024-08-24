@@ -75,6 +75,7 @@ export default class Ball {
         if (withinBrickWidth && withinBrickHeight) {
           this.speedY = -this.speedY
           brick.status = BRICK_STATUS.DESTROYED
+          this.game.score += 10
         }
       }
     }
