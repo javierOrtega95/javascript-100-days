@@ -11,6 +11,7 @@ export default class Game {
     this.canvas.height = 400
 
     this.fps = 60
+    this.currentFPS = 0
 
     this.isGameOver = false
     this.isGameWon = false
@@ -98,9 +99,20 @@ export default class Game {
     }
   }
 
+  drawUI() {
+    this.ctx.font = '12px Arial'
+    this.ctx.fillStyle = '#fff'
+    this.ctx.fillText(`FPS: ${this.currentFPS}`, 5, 20)
+  }
+
   start() {
     let lastFrameTime = window.performance.now()
     const timePerFrame = 1000 / this.fps
+
+    // variables for FPS calculation
+    let frameCount = 0
+    let lastTime = window.performance.now()
+    this.currentFPS = 0
 
     const draw = () => {
       if (this.isGameOver || this.isGameWon) return
@@ -115,7 +127,19 @@ export default class Game {
       const excessTime = elapsedTime % timePerFrame
       lastFrameTime = currentTime - excessTime
 
+      // calculate FPS
+      frameCount++
+      const delta = (currentTime - lastTime) / 1000
+
+      if (delta >= 1) {
+        this.currentFPS = Math.round(frameCount / delta)
+        frameCount = 0
+        lastTime = currentTime
+      }
+
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+      this.drawUI()
 
       this.paddle.draw()
       this.ball.draw()
