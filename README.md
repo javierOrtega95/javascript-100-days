@@ -15,3 +15,4 @@ Each project will have its own folder and will follow a similar structure:
 ## Projects
 
 1. [Tinder Swipe](./01-Tinder-Swipe/)
+2. [Arkanoid Game](./02-Arkanoid-Game/)
