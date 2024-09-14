@@ -3,8 +3,11 @@
   --green: #00b755;
   --yellow: #daaf38;
   --red: #ca4754;
-  --black: #222;
+  --black: #323437;
   --gray: #999;
+
+  --border-radius: 0.5rem;
+  --spacing: 0.5em;
 }
 
 body {
@@ -13,5 +16,59 @@ body {
   background: var(--black);
   font-family: Menlo, monospace;
   padding: 16px;
-  margin-top: 32px;
+}
+
+.header {
+  display: flex;
+  gap: 0.5rem;
+
+  .logo {
+    width: 2.5rem;
+    fill: var(--yellow);
+  }
+}
+
+.config {
+  display: flex;
+  justify-content: space-around;
+  background: #2c2e31;
+  border-radius: var(--border-radius);
+  padding: var(--spacing);
+
+  button {
+    background: 0 0;
+    cursor: pointer;
+    border: none;
+    line-height: 1.25;
+    transition: color 0.125s;
+
+    &.active {
+      color: var(--yellow);
+      font-weight: bold;
+    }
+  }
+
+  .time {
+    display: flex;
+    color: var(--yellow);
+
+    .clock {
+      margin-right: 4px;
+    }
+  }
+
+  .time-value {
+    color: #646669;
+
+    &:hover {
+      color: #d1d0c5;
+    }
+  }
+
+  .divider {
+    height: auto;
+    width: 0.5em;
+    border-radius: 0.25rem;
+    background: #323437;
+  }
 }
