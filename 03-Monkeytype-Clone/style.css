@@ -1,0 +1,17 @@
+:root {
+  color-scheme: light dark;
+  --green: #00b755;
+  --yellow: #daaf38;
+  --red: #ca4754;
+  --black: #222;
+  --gray: #999;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  background: var(--black);
+  font-family: Menlo, monospace;
+  padding: 16px;
+  margin-top: 32px;
+}
