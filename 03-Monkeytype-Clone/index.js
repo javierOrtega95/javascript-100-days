@@ -51,7 +51,36 @@ function initEvents() {
   $input.addEventListener('keyup', onKeyUp)
 }
 
-function onKeyDown() {} // TODO: handle Backspace
+function onKeyDown(event) {
+  const $currentWord = $paragraph.querySelector('monkey-word.active')
+  const $currentLetter = $currentWord.querySelector('monkey-letter.active')
+
+  const { key } = event
+
+  // space
+  if (key === ' ') {
+    event.preventDefault()
+
+    const $nextWord = $currentWord.nextElementSibling
+    const $nextLetter = $nextWord.querySelector('monkey-letter')
+
+    $currentWord.classList.remove('active', 'marked')
+    $currentLetter.classList.remove('active')
+
+    $nextWord.classList.add('active')
+    $nextLetter.classList.add('active')
+
+    $input.value = ''
+
+    const hasMissedLetters = $currentWord.querySelectorAll('monkey-letter:not(.correct)').length > 0
+    const classToAdd = hasMissedLetters ? 'marked' : 'correct'
+
+    $currentWord.classList.add(classToAdd)
+  }
+
+  // TODO: handle backSpace
+}
+
 function onKeyUp() {
   const $currentWord = $paragraph.querySelector('monkey-word.active')
   const $currentLetter = $currentWord.querySelector('monkey-letter.active')
