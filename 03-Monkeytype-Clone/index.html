@@ -20,11 +20,11 @@
         />
       </svg>
 
-      <h1 class="title">Monkeytype Clone</h1>
+      <h1 class="title">monkeytype</h1>
     </header>
 
     <main>
-      <section class="config">
+      <section id="config">
         <button class="time">
           <svg
             class="clock"
@@ -42,16 +42,27 @@
             <path d="M12 12l2 3" />
             <path d="M12 7v5" />
           </svg>
+
           time
         </button>
 
         <div class="divider"></div>
 
         <button class="time-value" aria-label="15 seconds">15</button>
-        <button class="time-value" aria-label="30 seconds">30</button>
-        <button class="time-value active" aria-label="60 seconds">60</button>
+        <button class="time-value active" aria-label="30 seconds">30</button>
+        <button class="time-value" aria-label="60 seconds">60</button>
         <button class="time-value" aria-label="120 seconds">120</button>
+      </section>
+
+      <section id="game">
+        <time></time>
+        
+        <p class="words"></p>
+
+        <input autofocus hidden />
       </section>
     </main>
   </body>
 </html>
+
+<script type="module" src="index.js"></script>
