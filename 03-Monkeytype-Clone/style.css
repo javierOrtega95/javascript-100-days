@@ -91,6 +91,15 @@ body {
   padding-left: 6px;
 }
 
+#game input {
+  z-index: -999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
 #game .words {
   display: flex;
   flex-wrap: wrap;
@@ -107,12 +116,26 @@ body {
   color: var(--gray);
 }
 
-#game .words monkey-letter.active::before {
-  position: absolute;
-  left: -65%;
-  content: '|';
-  color: var(--yellow);
-  animation: 1s blink infinite ease-in-out;
+#game .words monkey-letter {
+  &.active::before {
+    position: absolute;
+    left: -65%;
+    content: '|';
+    color: var(--yellow);
+    animation: 1s blink infinite ease-in-out;
+  }
+
+  &.correct {
+    color: var(--green);
+  }
+
+  &.incorrect {
+    color: var(--red);
+  }
+
+  &.active.is-last::before {
+    left: 65%;
+  }
 }
 
 @keyframes blink {
