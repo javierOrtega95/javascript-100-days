@@ -23,15 +23,15 @@ body {
   gap: 0.5rem;
   padding-top: 32px;
   margin-bottom: 16px;
+}
 
-  .title {
-    color: var(--text-color);
-  }
+.header .title {
+  color: var(--text-color);
+}
 
-  .logo {
-    width: 2.5rem;
-    fill: var(--yellow);
-  }
+.header .logo {
+  width: 2.5rem;
+  fill: var(--yellow);
 }
 
 #config {
@@ -42,62 +42,86 @@ body {
   background: #2c2e31;
   border-radius: var(--border-radius);
   padding: 8px;
+}
 
-  button {
-    background: 0 0;
-    cursor: pointer;
-    border: none;
-    transition: color 0.125s;
+#config button {
+  background: 0 0;
+  cursor: pointer;
+  border: none;
+  transition: color 0.125s;
+}
 
-    &.active {
-      color: var(--yellow);
-      font-weight: bold;
-    }
-  }
+#config button.active {
+  color: var(--yellow);
+  font-weight: bold;
+}
 
-  .time {
-    display: flex;
-    color: var(--yellow);
+#config .time {
+  display: flex;
+  color: var(--yellow);
+}
 
-    .clock {
-      margin-right: 4px;
-    }
-  }
+#config .time .clock {
+  margin-right: 4px;
+}
 
-  .time-value {
-    color: #646669;
+#config .time-value {
+  color: #646669;
+}
 
-    &:hover {
-      color: var(--text-color);
-    }
-  }
+#config .time-value:hover {
+  color: var(--text-color);
+}
 
-  .divider {
-    height: auto;
-    width: 0.5em;
-    border-radius: 0.25rem;
-    background: var(--black);
-  }
+#config .divider {
+  height: auto;
+  width: 0.5em;
+  border-radius: 0.25rem;
+  background: var(--black);
 }
 
 #game {
   display: grid;
   font-size: 24px;
   margin-top: 64px;
+}
 
-  time {
-    color: var(--yellow);
-    padding-left: 6px;
+#game time {
+  color: var(--yellow);
+  padding-left: 6px;
+}
+
+#game .words {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#game .words monkey-word {
+  color: var(--text-color);
+  margin: 0.25em 0.3em;
+  line-height: 32px;
+}
+
+#game .words monkey-letter {
+  position: relative;
+  color: var(--gray);
+}
+
+#game .words monkey-letter.active::before {
+  position: absolute;
+  left: -65%;
+  content: '|';
+  color: var(--yellow);
+  animation: 1s blink infinite ease-in-out;
+}
+
+@keyframes blink {
+  0%,
+  25% {
+    opacity: 1;
   }
 
-  .words {
-    display: flex;
-    flex-wrap: wrap;
-
-    monkey-word {
-      color: var(--text-color);
-      margin: 0.25em 0.3em;
-      line-height: 32px;
-    }
+  75% {
+    opacity: 0;
   }
 }

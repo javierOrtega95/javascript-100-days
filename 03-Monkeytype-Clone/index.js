@@ -22,6 +22,11 @@ function initGame() {
 
   $paragraph.innerHTML = mappedWords.join('')
 
+  const firstWord = document.querySelector('monkey-word')
+  firstWord.classList.add('active')
+  const firstLetter = document.querySelector('monkey-letter')
+  firstLetter.classList.add('active')
+
   const intervalId = setInterval(() => {
     currentTime--
     $time.textContent = currentTime
