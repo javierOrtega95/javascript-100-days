@@ -43,7 +43,7 @@ function initEvents() {
 
     if (currentTime === 0) {
       clearInterval(intervalId)
-      gameOver('Game Over')
+      gameOver()
     }
   }, 1000)
 
@@ -73,20 +73,55 @@ function onKeyDown(event) {
     $input.value = ''
 
     const hasMissedLetters = $currentWord.querySelectorAll('monkey-letter:not(.correct)').length > 0
+
     const classToAdd = hasMissedLetters ? 'marked' : 'correct'
 
     $currentWord.classList.add(classToAdd)
   }
 
   // TODO: handle backSpace
+  if (key === 'Backspace') {
+    const $prevWord = $currentWord.previousElementSibling
+    const $prevLetter = $currentLetter.previousElementSibling
+
+    if (!$prevWord && !$prevLetter) {
+      event.preventDefault()
+
+      return
+    }
+
+    const $wordMarked = $paragraph.querySelector('monkey-word.marked')
+
+    if ($wordMarked && !$prevLetter) {
+      event.preventDefault()
+
+      $prevWord.classList.remove('marked')
+      $prevWord.classList.add('active')
+
+      const $letterToGo = $prevWord.querySelector('monkey-letter:last-child')
+
+      $currentLetter.classList.remove('active')
+      $letterToGo.classList.add('active')
+
+      // update the input before key up
+      const prevWords = $prevWord.querySelectorAll('monkey-letter.correct, monkey-letter.incorrect')
+
+      $input.value = [...prevWords]
+        .map(($el) => ($el.classList.contains('correct') ? $el.innerText : '*'))
+        .join('')
+    }
+  }
 }
 
 function onKeyUp() {
   const $currentWord = $paragraph.querySelector('monkey-word.active')
   const $currentLetter = $currentWord.querySelector('monkey-letter.active')
   const $allLetters = $currentWord.querySelectorAll('monkey-letter')
+
   const currentWordValue = $currentWord.innerText.trim()
+
   const { value: inputValue } = $input
+
   const inputLetters = inputValue.split('')
 
   $input.maxLength = currentWordValue.length
