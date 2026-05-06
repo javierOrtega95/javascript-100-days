@@ -5,8 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>100 days of JavaScript · 03 - Monkeytype Clone</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      .back-btn {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        background: rgba(0, 0, 0, 0.45);
+        color: #fff;
+        text-decoration: none;
+        padding: 0.35rem 0.75rem;
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: system-ui, sans-serif;
+        backdrop-filter: blur(8px);
+        z-index: 1000;
+        transition: background 0.15s;
+      }
+      .back-btn:hover { background: rgba(0, 0, 0, 0.65); }
+    </style>
   </head>
   <body>
+    <a class="back-btn" href="../">← Back</a>
     <header class="header">
       <svg class="logo" viewBox="-680 -1030 300 180">
         <path
