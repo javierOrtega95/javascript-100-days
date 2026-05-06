@@ -15,6 +15,7 @@ export const projects = [
     tags: ['Canvas API', 'OOP', 'Game Loop'],
     demo: './02-Arkanoid-Game/',
     code: 'https://github.com/javierOrtega95/javascript-100-days/tree/main/02-Arkanoid-Game',
+    thumbnail: './assets/thumbnails/02.webp',
   },
   {
     id: '03',
@@ -23,5 +24,6 @@ export const projects = [
     tags: ['Custom Elements', 'DOM', 'Timer'],
     demo: './03-Monkeytype-Clone/',
     code: 'https://github.com/javierOrtega95/javascript-100-days/tree/main/03-Monkeytype-Clone',
+    thumbnail: './assets/thumbnails/03.webp',
   },
 ];
