@@ -1,18 +1,26 @@
 # JavaScript 100 Days
 
-This repository is a collection of projects to improve my JavaScript skills and to practice HTML and CSS concepts. Each project is designed to cover different aspects and challenges of web development, from basic to advanced levels.
+A collection of projects to improve JavaScript skills and practice HTML and CSS concepts. Each project covers different web development aspects, from basic to advanced.
 
-## Repository Structure
+## How to Run
 
-Each project will have its own folder and will follow a similar structure:
+No build step required. Open any project's `index.html` directly in a browser, or use a local server (e.g. [VS Code Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)).
 
-📂 project-name <br />
+## Structure
 
-├── 📜 index.html <br />
-├── 📜 style.css <br />
-└── 📜 index.js <br />
+Each project lives in its own folder:
+
+```
+project-name/
+├── index.html
+├── style.css
+└── index.js
+```
 
 ## Projects
 
-1. [Tinder Swipe](./01-Tinder-Swipe/)
-2. [Arkanoid Game](./02-Arkanoid-Game/)
+| #   | Project                                    | Status      |
+| --- | ------------------------------------------ | ----------- |
+| 01  | [Tinder Swipe](./01-Tinder-Swipe/)         | Complete    |
+| 02  | [Arkanoid Game](./02-Arkanoid-Game/)       | Complete    |
+| 03  | [Monkeytype Clone](./03-Monkeytype-Clone/) | In progress |

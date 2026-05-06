@@ -1,0 +1,12 @@
+{
+  "name": "javascript-100-days",
+  "private": true,
+  "scripts": {
+    "lint": "eslint \"**/*.js\"",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "prettier": "^3"
+  }
+}
