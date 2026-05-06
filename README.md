@@ -1,5 +1,3 @@
-# JavaScript 100 Days
-
 ![JavaScript 100 Days](./banner.png)
 
 A collection of projects to improve JavaScript skills and practice HTML and CSS concepts. Each project covers different web development aspects, from basic to advanced.
