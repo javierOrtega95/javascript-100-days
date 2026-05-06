@@ -19,8 +19,8 @@ project-name/
 
 ## Projects
 
-| #   | Project                                    | Status      |
-| --- | ------------------------------------------ | ----------- |
-| 01  | [Tinder Swipe](./01-Tinder-Swipe/)         | Complete    |
-| 02  | [Arkanoid Game](./02-Arkanoid-Game/)       | Complete    |
-| 03  | [Monkeytype Clone](./03-Monkeytype-Clone/) | In progress |
+| #   | Project                                    |
+| --- | ------------------------------------------ |
+| 01  | [Tinder Swipe](./01-Tinder-Swipe/)         |
+| 02  | [Arkanoid Game](./02-Arkanoid-Game/)       |
+| 03  | [Monkeytype Clone](./03-Monkeytype-Clone/) |
