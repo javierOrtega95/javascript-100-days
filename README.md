@@ -29,6 +29,17 @@ project-name/
 | 02  | [Arkanoid Game](./02-Arkanoid-Game/)       |
 | 03  | [Monkeytype Clone](./03-Monkeytype-Clone/) |
 
+## Workflow
+
+Each project is developed on its own branch and merged into `main` via pull request. Direct commits to `main` are not allowed.
+
+```bash
+git checkout -b feat/04-project-name
+# ... develop the project ...
+git push origin feat/04-project-name
+# open a PR → merge into main
+```
+
 ## Adding a project
 
 1. **Create the folder** following the naming convention `NN-Project-Name/` with `index.html`, `style.css` and `index.js`.
