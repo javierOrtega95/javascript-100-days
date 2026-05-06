@@ -1,6 +1,10 @@
 # JavaScript 100 Days
 
-![JavaScript 100 Days](./banner.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./banner-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="./banner-light.png">
+  <img src="./banner-dark.png" alt="JavaScript 100 Days">
+</picture>
 
 A collection of projects to improve JavaScript skills and practice HTML and CSS concepts. Each project covers different web development aspects, from basic to advanced.
 
