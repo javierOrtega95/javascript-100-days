@@ -102,6 +102,9 @@ body {
 #game .words {
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
+  height: 132px;
+  transition: margin-top 0.3s ease;
 }
 
 #game .words monkey-word {
@@ -141,6 +144,55 @@ body {
 
   &.active.is-last::before {
     left: 65%;
+  }
+}
+
+#game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 4rem;
+  color: var(--text-color);
+}
+
+#game-over h2 {
+  font-size: 5rem;
+  font-weight: normal;
+  color: var(--yellow);
+}
+
+#game-over h2 span {
+  font-size: 1.5rem;
+  color: var(--gray);
+  margin-left: 0.5rem;
+}
+
+#game-over p {
+  font-size: 2rem;
+}
+
+#game-over p span {
+  font-size: 1rem;
+  color: var(--gray);
+  margin-left: 0.25rem;
+}
+
+#game-over #restart {
+  margin-top: 1rem;
+  background: none;
+  border: 1.5px solid var(--gray);
+  color: var(--gray);
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: color 0.2s, border-color 0.2s;
+
+  &:hover {
+    color: var(--text-color);
+    border-color: var(--text-color);
   }
 }
 

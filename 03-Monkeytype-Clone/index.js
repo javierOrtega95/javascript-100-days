@@ -3,113 +3,125 @@ import { words as INITIAL_WORDS } from './data.js';
 const $time = document.querySelector('time');
 const $paragraph = document.querySelector('.words');
 const $input = document.querySelector('input');
+const $timeButtons = document.querySelectorAll('.time-value');
 
-const INITIAL_TIME = 30;
-let currentTime = INITIAL_TIME;
+let currentTime = 30;
+let selectedTime = 30;
+let intervalId = null;
+let isGameOver = false;
 
 initGame();
 initEvents();
 
 function initGame() {
+  currentTime = selectedTime;
+  $time.textContent = currentTime;
+  $input.value = '';
+  $paragraph.style.marginTop = '0px';
+
   const words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 50);
 
-  $time.textContent = currentTime;
+  $paragraph.innerHTML = words
+    .map(
+      (word) =>
+        `<monkey-word>${word
+          .split('')
+          .map((letter) => `<monkey-letter>${letter}</monkey-letter>`)
+          .join('')}</monkey-word>`
+    )
+    .join('');
 
-  const mappedWords = words.map((word) => {
-    const letters = word.split('');
-
-    return `<monkey-word>
-      ${letters.map((letter) => `<monkey-letter>${letter}</monkey-letter>`).join('')}
-    </monkey-word>`;
-  });
-
-  $paragraph.innerHTML = mappedWords.join('');
-
-  const firstWord = document.querySelector('monkey-word');
-  firstWord.classList.add('active');
-
-  const firstLetter = document.querySelector('monkey-letter');
-  firstLetter.classList.add('active');
+  $paragraph.querySelector('monkey-word').classList.add('active');
+  $paragraph.querySelector('monkey-letter').classList.add('active');
 }
 
 function initEvents() {
-  document.addEventListener('keydown', () => {
-    $input.focus();
-  });
+  document.addEventListener('keydown', () => $input.focus());
+  $input.addEventListener('keydown', onKeyDown);
+  $input.addEventListener('keyup', onKeyUp);
 
-  const intervalId = setInterval(() => {
+  $timeButtons.forEach(($btn) => {
+    $btn.addEventListener('click', () => {
+      $timeButtons.forEach(($b) => $b.classList.remove('active'));
+      $btn.classList.add('active');
+      selectedTime = parseInt($btn.textContent);
+      resetGame();
+    });
+  });
+}
+
+function resetGame() {
+  isGameOver = false;
+  clearInterval(intervalId);
+  intervalId = null;
+  document.querySelector('#game-over')?.remove();
+  initGame();
+  $input.focus();
+}
+
+function startTimer() {
+  if (intervalId) return;
+  intervalId = setInterval(() => {
     currentTime--;
     $time.textContent = currentTime;
-
     if (currentTime === 0) {
       clearInterval(intervalId);
+      intervalId = null;
       gameOver();
     }
   }, 1000);
-
-  $input.addEventListener('keydown', onKeyDown);
-  $input.addEventListener('keyup', onKeyUp);
 }
 
 function onKeyDown(event) {
+  if (isGameOver) return;
+  const { key } = event;
   const $currentWord = $paragraph.querySelector('monkey-word.active');
   const $currentLetter = $currentWord.querySelector('monkey-letter.active');
 
-  const { key } = event;
-
-  // space
   if (key === ' ') {
     event.preventDefault();
-
     const $nextWord = $currentWord.nextElementSibling;
-    const $nextLetter = $nextWord.querySelector('monkey-letter');
-
-    $currentWord.classList.remove('active', 'marked');
-    $currentLetter.classList.remove('active');
-
-    $nextWord.classList.add('active');
-    $nextLetter.classList.add('active');
-
-    $input.value = '';
+    if (!$nextWord) return;
 
     const hasMissedLetters =
       $currentWord.querySelectorAll('monkey-letter:not(.correct)').length > 0;
 
-    const classToAdd = hasMissedLetters ? 'marked' : 'correct';
+    $currentWord.classList.remove('active');
+    $currentLetter.classList.remove('active');
+    $currentWord.classList.add(hasMissedLetters ? 'marked' : 'correct');
 
-    $currentWord.classList.add(classToAdd);
+    $nextWord.classList.add('active');
+    $nextWord.querySelector('monkey-letter').classList.add('active');
+
+    $input.value = '';
+    scrollWords($nextWord);
   }
 
-  // TODO: handle backSpace
   if (key === 'Backspace') {
     const $prevWord = $currentWord.previousElementSibling;
     const $prevLetter = $currentLetter.previousElementSibling;
 
     if (!$prevWord && !$prevLetter) {
       event.preventDefault();
-
       return;
     }
 
-    const $wordMarked = $paragraph.querySelector('monkey-word.marked');
-
-    if ($wordMarked && !$prevLetter) {
+    if ($prevWord?.classList.contains('marked') && !$prevLetter) {
       event.preventDefault();
+
+      $currentWord.classList.remove('active');
+      $currentLetter.classList.remove('active');
 
       $prevWord.classList.remove('marked');
       $prevWord.classList.add('active');
 
       const $letterToGo = $prevWord.querySelector('monkey-letter:last-child');
-
-      $currentLetter.classList.remove('active');
       $letterToGo.classList.add('active');
 
-      // update the input before key up
-      const prevWords = $prevWord.querySelectorAll(
+      const prevLetters = $prevWord.querySelectorAll(
         'monkey-letter.correct, monkey-letter.incorrect'
       );
-
-      $input.value = [...prevWords]
+      $input.value = [...prevLetters]
         .map(($el) => ($el.classList.contains('correct') ? $el.innerText : '*'))
         .join('');
     }
@@ -117,41 +129,75 @@ function onKeyDown(event) {
 }
 
 function onKeyUp() {
+  if (isGameOver) return;
+  startTimer();
+
   const $currentWord = $paragraph.querySelector('monkey-word.active');
-  const $currentLetter = $currentWord.querySelector('monkey-letter.active');
   const $allLetters = $currentWord.querySelectorAll('monkey-letter');
-
   const currentWordValue = $currentWord.innerText.trim();
-
   const { value: inputValue } = $input;
 
-  const inputLetters = inputValue.split('');
-
   $input.maxLength = currentWordValue.length;
+
   $allLetters.forEach(($letter) =>
     $letter.classList.remove('correct', 'incorrect')
   );
 
-  inputLetters.forEach((char, index) => {
-    const $letter = $allLetters[index];
-    const letterToCheck = currentWordValue[index];
-
-    const isCorrect = char === letterToCheck;
-    const letterClass = isCorrect ? 'correct' : 'incorrect';
-    $letter.classList.add(letterClass);
+  inputValue.split('').forEach((char, index) => {
+    const isCorrect = char === currentWordValue[index];
+    $allLetters[index]?.classList.add(isCorrect ? 'correct' : 'incorrect');
   });
 
-  $currentLetter.classList.remove('active', 'is-last');
+  $allLetters.forEach(($l) => $l.classList.remove('active', 'is-last'));
   const $nextActiveLetter = $allLetters[inputValue.length];
 
   if ($nextActiveLetter) {
     $nextActiveLetter.classList.add('active');
   } else {
-    $currentLetter.classList.add('active', 'is-last');
-    // TODO: gameOver if there is no next word
+    $allLetters[$allLetters.length - 1].classList.add('active', 'is-last');
+  }
+}
+
+function scrollWords($activeWord) {
+  const $words = [...$paragraph.querySelectorAll('monkey-word')];
+  const firstTop = $words[0].offsetTop;
+  const { offsetTop } = $activeWord;
+
+  if (offsetTop === firstTop) return;
+
+  const secondRowWord = $words.find((w) => w.offsetTop > firstTop);
+  if (!secondRowWord) return;
+
+  const rowHeight = secondRowWord.offsetTop - firstTop;
+  const currentRow = Math.floor((offsetTop - firstTop) / rowHeight);
+
+  if (currentRow >= 2) {
+    $paragraph.style.marginTop = `-${(currentRow - 1) * rowHeight}px`;
   }
 }
 
 function gameOver() {
-  console.log('Game Over');
+  isGameOver = true;
+  const $correctWords = $paragraph.querySelectorAll('monkey-word.correct');
+  const $attempted = $paragraph.querySelectorAll(
+    'monkey-letter.correct, monkey-letter.incorrect'
+  );
+  const $correct = $paragraph.querySelectorAll('monkey-letter.correct');
+
+  const wpm = Math.round(($correctWords.length / selectedTime) * 60);
+  const accuracy =
+    $attempted.length > 0
+      ? Math.round(($correct.length / $attempted.length) * 100)
+      : 0;
+
+  const $gameOver = document.createElement('section');
+  $gameOver.id = 'game-over';
+  $gameOver.innerHTML = `
+    <h2>${wpm} <span>wpm</span></h2>
+    <p>${accuracy}<span>%</span> accuracy</p>
+    <button id="restart">restart</button>
+  `;
+
+  document.querySelector('#game').after($gameOver);
+  document.querySelector('#restart').addEventListener('click', resetGame);
 }
