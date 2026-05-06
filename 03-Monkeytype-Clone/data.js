@@ -172,4 +172,4 @@ export const words = [
   'only',
   'tell',
   'about',
-]
+];
