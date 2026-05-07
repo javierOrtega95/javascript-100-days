@@ -112,9 +112,10 @@ copyBtn.addEventListener('click', async () => {
 
   await navigator.clipboard.writeText(text);
 
-  copyBtn.textContent = 'Copied!';
+  const label = copyBtn.querySelector('span');
+  label.textContent = 'Copied!';
 
   setTimeout(() => {
-    copyBtn.textContent = 'Copy Data';
+    label.textContent = 'Copy Data';
   }, 2000);
 });
