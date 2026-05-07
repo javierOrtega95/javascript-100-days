@@ -1,0 +1,69 @@
+/* ── Site nav ──────────────────────────────────────────────────────
+   Fixed top-left component shared across all projects.
+   Displays the 100JS days mini-logo and a back link.
+──────────────────────────────────────────────────────────────────── */
+
+.site-nav {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 0.25rem 0;
+}
+
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.site-nav__number {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #6b7a99;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.site-nav__badge {
+  background: #daaf38;
+  color: #1a1a1a;
+  font-weight: 900;
+  font-size: 0.5rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-5deg);
+  flex-shrink: 0;
+}
+
+.site-nav__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7a99;
+}
+
+.site-nav__project {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #daaf38;
+}
+
+.site-nav__back {
+  font-size: 0.7rem;
+  color: #daaf38;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.site-nav__back:hover {
+  opacity: 0.7;
+}

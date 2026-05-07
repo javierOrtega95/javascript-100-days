@@ -45,22 +45,21 @@ git push origin feat/04-project-name
 
 1. **Create the folder** following the naming convention `NN-Project-Name/` with `index.html`, `style.css` and `index.js`.
 
-2. **Add the back button** inside `<body>` so users can return to the demo page:
+2. **Add the site nav** inside `<body>` and link `shared.css` in `<head>`:
 
 ```html
-<style>
-  .back-btn {
-    position: fixed; top: 1rem; left: 1rem;
-    background: rgba(0,0,0,0.45); color: #fff;
-    text-decoration: none; padding: .35rem .75rem;
-    border-radius: 6px; font-size: 13px;
-    font-family: system-ui, sans-serif;
-    backdrop-filter: blur(8px); z-index: 1000;
-    transition: background .15s;
-  }
-  .back-btn:hover { background: rgba(0,0,0,0.65); }
-</style>
-<a class="back-btn" href="../">← Back</a>
+<link rel="stylesheet" href="../shared.css" />
+```
+
+```html
+<nav class="site-nav">
+  <a class="site-nav__logo" href="../">
+    <span class="site-nav__number">100</span>
+    <span class="site-nav__badge">JS</span>
+    <span class="site-nav__label">days</span>
+  </a>
+  <a class="site-nav__back" href="../">← Back</a>
+</nav>
 ```
 
 3. **Generate the thumbnail:**
