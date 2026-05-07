@@ -206,8 +206,9 @@ body {
 }
 
 .card__flag {
-  font-size: 2.5rem;
-  line-height: 1;
+  width: 40px;
+  height: auto;
+  border-radius: 3px;
 }
 
 .card__country {
