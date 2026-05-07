@@ -26,4 +26,14 @@ export const projects = [
     code: 'https://github.com/javierOrtega95/javascript-100-days/tree/main/03-Monkeytype-Clone',
     thumbnail: './assets/thumbnails/03.webp',
   },
+  {
+    id: '04',
+    title: 'Geo IP',
+    description:
+      'Look up any IP address and get its geolocation data instantly.',
+    tags: ['Fetch API', 'Intl API', 'IP Geolocation'],
+    demo: './04-Geo-IP/',
+    code: 'https://github.com/javierOrtega95/javascript-100-days/tree/main/04-Geo-IP',
+    thumbnail: './assets/thumbnails/04.webp',
+  },
 ];
