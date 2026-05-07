@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>100 days of JavaScript · 04 - Geo IP</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <a class="back-btn" href="../">← Back</a>
+
+    <main class="container">
+      <section class="hero">
+        <h1 class="hero__title">GeoIP Lookup</h1>
+
+        <p class="hero__subtitle">
+          Enter any IP address to discover its location.
+        </p>
+      </section>
+
+      <form class="search" id="search-form" novalidate>
+        <div class="search__wrap">
+          <svg
+            class="search__icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8" />
+
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+
+          <input
+            id="ip-input"
+            class="search__input"
+            type="text"
+            placeholder="e.g. 54.85.132.205"
+            autocomplete="off"
+            spellcheck="false"
+          />
+
+          <button class="search__btn" type="submit">Track IP</button>
+        </div>
+
+        <p id="error-msg" class="error hidden" role="alert"></p>
+      </form>
+
+      <article id="results" class="card hidden">
+        <header class="card__header">
+          <div class="card__identity">
+            <span id="result-flag" class="card__flag" aria-hidden="true"></span>
+
+            <div>
+              <h2 id="result-country" class="card__country"></h2>
+
+              <span id="result-ip" class="card__ip"></span>
+            </div>
+          </div>
+
+          <div class="card__badge" aria-hidden="true">
+            <span class="card__badge-dot"></span>
+
+            <span>FOUND</span>
+          </div>
+        </header>
+
+        <dl class="card__grid">
+          <div class="card__field">
+            <dt class="card__label">City</dt>
+            <dd id="result-city" class="card__value"></dd>
+          </div>
+
+          <div class="card__field">
+            <dt class="card__label">Region</dt>
+            <dd id="result-region" class="card__value"></dd>
+          </div>
+
+          <div class="card__field">
+            <dt class="card__label">Timezone</dt>
+            <dd id="result-timezone" class="card__value"></dd>
+          </div>
+
+          <div class="card__field">
+            <dt class="card__label">ISP</dt>
+            <dd id="result-isp" class="card__value"></dd>
+          </div>
+
+          <div class="card__field">
+            <dt class="card__label">Latitude</dt>
+            <dd id="result-lat" class="card__value card__value--accent"></dd>
+          </div>
+
+          <div class="card__field">
+            <dt class="card__label">Longitude</dt>
+            <dd id="result-lng" class="card__value card__value--accent"></dd>
+          </div>
+        </dl>
+
+        <footer class="card__footer">
+          <span id="result-proxy" class="card__tag"></span>
+
+          <button id="copy-btn" class="card__copy" type="button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+
+              <path
+                d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+              />
+            </svg>
+
+            Copy Data
+          </button>
+        </footer>
+      </article>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>
