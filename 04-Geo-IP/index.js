@@ -94,6 +94,16 @@ document.getElementById('search-form').addEventListener('submit', (event) => {
   handleSearch();
 });
 
+// ── Suggestions ──────────────────────────────────────────────────
+
+document.querySelectorAll('.chip').forEach((chip) => {
+  chip.addEventListener('click', () => {
+    ipInput.value = chip.dataset.ip;
+    handleSearch();
+  });
+});
+
+
 // ── Copy ──────────────────────────────────────────────────────────
 
 copyBtn.addEventListener('click', async () => {

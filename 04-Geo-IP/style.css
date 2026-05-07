@@ -169,6 +169,33 @@ body {
 }
 
 
+/* ── Suggestions ───────────────────────────────────────────────── */
+
+.search__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.chip {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.65rem;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+
 /* ── Error ─────────────────────────────────────────────────────── */
 
 .error {

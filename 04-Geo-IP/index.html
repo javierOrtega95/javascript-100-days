@@ -43,7 +43,7 @@
             id="ip-input"
             class="search__input"
             type="text"
-            placeholder="e.g. 54.85.132.205"
+            placeholder="e.g. 8.8.8.8"
             autocomplete="off"
             spellcheck="false"
           />
@@ -52,6 +52,14 @@
         </div>
 
         <p id="error-msg" class="error hidden" role="alert"></p>
+
+        <div class="search__suggestions" aria-label="Quick examples">
+          <button class="chip" type="button" data-ip="8.8.8.8">8.8.8.8</button>
+          <button class="chip" type="button" data-ip="1.1.1.1">1.1.1.1</button>
+          <button class="chip" type="button" data-ip="77.88.8.8">77.88.8.8</button>
+          <button class="chip" type="button" data-ip="185.60.216.35">185.60.216.35</button>
+          <button class="chip" type="button" data-ip="212.166.64.1">212.166.64.1</button>
+        </div>
       </form>
 
       <article id="results" class="card hidden">
