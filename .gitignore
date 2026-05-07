@@ -9,9 +9,6 @@ desktop.ini
 *.sublime-project
 *.sublime-workspace
 
-# Claude Code (local config, not for sharing)
-.claude/settings.local.json
-
 # Node
 node_modules/
 npm-debug.log*
