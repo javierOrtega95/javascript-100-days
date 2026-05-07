@@ -45,6 +45,8 @@ function renderResults({ country, ip, city, region, timezone, org, loc }) {
   document.getElementById('result-lng').textContent = longitude || '—';
   document.getElementById('result-proxy').style.display = 'none';
 
+  results.classList.remove('fade-up');
+  void results.offsetWidth;
   results.classList.remove('hidden');
   results.classList.add('fade-up');
 }
