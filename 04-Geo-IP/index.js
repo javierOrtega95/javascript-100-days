@@ -10,7 +10,8 @@ const copyBtn = document.getElementById('copy-btn');
 
 // ── Helpers ───────────────────────────────────────────────────────
 
-const flagUrl = (code) => `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
+const getFlagUrl = (code) =>
+  `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
 
 function showError(msg) {
   errorMsg.textContent = msg;
@@ -31,7 +32,7 @@ function renderResults({ country, ip, city, region, timezone, org, loc }) {
   const isp = org?.replace(/^AS\d+\s/, '') || '—';
 
   const flagEl = document.getElementById('result-flag');
-  flagEl.src = country ? flagUrl(country) : '';
+  flagEl.src = country ? getFlagUrl(country) : '';
   flagEl.alt = country ? `${countryName} flag` : '';
 
   document.getElementById('result-country').textContent = countryName;
