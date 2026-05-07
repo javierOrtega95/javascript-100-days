@@ -52,7 +52,8 @@ function renderResults({ country, ip, city, region, timezone, org, loc }) {
 // ── API ───────────────────────────────────────────────────────────
 
 async function lookupIP(ip) {
-  const url = ip ? `${API_URL}/${ip}/json` : `${API_URL}/json`;
+  const segment = ip ? encodeURIComponent(ip) : '';
+  const url = segment ? `${API_URL}/${segment}/json` : `${API_URL}/json`;
 
   const response = await fetch(url);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -66,6 +67,8 @@ async function lookupIP(ip) {
 // ── Search ────────────────────────────────────────────────────────
 
 async function handleSearch() {
+  if (trackBtn.disabled) return;
+
   const ip = ipInput.value.trim();
 
   hideError();
@@ -115,12 +118,14 @@ copyBtn.addEventListener('click', async () => {
     `Lng:      ${get('result-lng')}`,
   ].join('\n');
 
-  await navigator.clipboard.writeText(text);
-
-  const label = copyBtn.querySelector('span');
-  label.textContent = 'Copied!';
-
-  setTimeout(() => {
-    label.textContent = 'Copy Data';
-  }, 2000);
+  try {
+    await navigator.clipboard.writeText(text);
+    const label = copyBtn.querySelector('span');
+    label.textContent = 'Copied!';
+    setTimeout(() => {
+      label.textContent = 'Copy Data';
+    }, 2000);
+  } catch {
+    showError('Could not copy to clipboard.');
+  }
 });
