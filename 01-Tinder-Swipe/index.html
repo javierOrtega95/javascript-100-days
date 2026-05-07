@@ -3,29 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      .back-btn {
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        background: rgba(0, 0, 0, 0.45);
-        color: #fff;
-        text-decoration: none;
-        padding: 0.35rem 0.75rem;
-        border-radius: 6px;
-        font-size: 13px;
-        font-family: system-ui, sans-serif;
-        backdrop-filter: blur(8px);
-        z-index: 1000;
-        transition: background 0.15s;
-      }
-      .back-btn:hover { background: rgba(0, 0, 0, 0.65); }
-    </style>
     <title>100 days of JavaScript · 01 - Tinder Swipe</title>
+    <link rel="stylesheet" href="../shared.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <a class="back-btn" href="../">← Back</a>
+    <nav class="site-nav">
+      <a class="site-nav__logo" href="../">
+        <span class="site-nav__number">100</span>
+        <span class="site-nav__badge">JS</span>
+        <span class="site-nav__label">days</span>
+      </a>
+      <p class="site-nav__project">#01 · Tinder Swipe</p>
+      <a class="site-nav__back" href="../">← Back to home</a>
+    </nav>
     <main class="iphone">
       <section class="display">
         <header>

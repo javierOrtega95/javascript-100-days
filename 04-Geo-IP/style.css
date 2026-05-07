@@ -42,29 +42,6 @@ body {
 }
 
 
-/* ── Back button ───────────────────────────────────────────────── */
-
-.back-btn {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  background: rgba(0, 0, 0, 0.45);
-  color: #fff;
-  text-decoration: none;
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  font-size: 13px;
-  font-family: var(--font-sans);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  transition: background 0.15s;
-}
-
-.back-btn:hover {
-  background: rgba(0, 0, 0, 0.65);
-}
-
-
 /* ── Layout ────────────────────────────────────────────────────── */
 
 .container {
