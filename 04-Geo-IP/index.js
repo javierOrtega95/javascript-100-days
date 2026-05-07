@@ -106,6 +106,8 @@ document.querySelectorAll('.chip').forEach((chip) => {
 
 // ── Copy ──────────────────────────────────────────────────────────
 
+let copyResetTimer = null;
+
 copyBtn.addEventListener('click', async () => {
   const get = (id) => document.getElementById(id).textContent;
 
@@ -124,7 +126,8 @@ copyBtn.addEventListener('click', async () => {
     await navigator.clipboard.writeText(text);
     const label = copyBtn.querySelector('span');
     label.textContent = 'Copied!';
-    setTimeout(() => {
+    clearTimeout(copyResetTimer);
+    copyResetTimer = setTimeout(() => {
       label.textContent = 'Copy Data';
     }, 2000);
   } catch {
