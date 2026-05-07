@@ -1,4 +1,6 @@
-const API_URL = 'https://ipapi.co';
+const API_URL = 'https://ipinfo.io';
+
+const REGION_NAMES = new Intl.DisplayNames(['en'], { type: 'region' });
 
 const ipInput = document.getElementById('ip-input');
 const trackBtn = document.querySelector('#search-form [type="submit"]');
@@ -8,8 +10,7 @@ const copyBtn = document.getElementById('copy-btn');
 
 // ── Helpers ───────────────────────────────────────────────────────
 
-const flagUrl = (code) =>
-  `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
+const flagUrl = (code) => `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
 
 function showError(msg) {
   errorMsg.textContent = msg;
@@ -24,29 +25,23 @@ function hideError() {
 
 // ── Render ────────────────────────────────────────────────────────
 
-function renderResults({
-  country_code,
-  country_name,
-  ip,
-  city,
-  region,
-  timezone,
-  org,
-  latitude,
-  longitude,
-}) {
-  const flagEl = document.getElementById('result-flag');
-  flagEl.src = country_code ? flagUrl(country_code) : '';
-  flagEl.alt = country_code ? `${country_name} flag` : '';
+function renderResults({ country, ip, city, region, timezone, org, loc }) {
+  const countryName = country ? (REGION_NAMES.of(country) ?? country) : '—';
+  const [latitude, longitude] = (loc ?? '').split(',');
+  const isp = org?.replace(/^AS\d+\s/, '') || '—';
 
-  document.getElementById('result-country').textContent = country_name ?? '—';
+  const flagEl = document.getElementById('result-flag');
+  flagEl.src = country ? flagUrl(country) : '';
+  flagEl.alt = country ? `${countryName} flag` : '';
+
+  document.getElementById('result-country').textContent = countryName;
   document.getElementById('result-ip').textContent = ip;
   document.getElementById('result-city').textContent = city || '—';
   document.getElementById('result-region').textContent = region || '—';
   document.getElementById('result-timezone').textContent = timezone || '—';
-  document.getElementById('result-isp').textContent = org || '—';
-  document.getElementById('result-lat').textContent = latitude ?? '—';
-  document.getElementById('result-lng').textContent = longitude ?? '—';
+  document.getElementById('result-isp').textContent = isp;
+  document.getElementById('result-lat').textContent = latitude || '—';
+  document.getElementById('result-lng').textContent = longitude || '—';
   document.getElementById('result-proxy').style.display = 'none';
 
   results.classList.remove('hidden');
@@ -56,13 +51,13 @@ function renderResults({
 // ── API ───────────────────────────────────────────────────────────
 
 async function lookupIP(ip) {
-  const url = ip ? `${API_URL}/${ip}/json/` : `${API_URL}/json/`;
+  const url = ip ? `${API_URL}/${ip}/json` : `${API_URL}/json`;
 
   const response = await fetch(url);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
   const data = await response.json();
-  if (data.error) throw new Error(data.reason);
+  if (data.bogon) throw new Error('Private or reserved IP address');
 
   return data;
 }
@@ -102,7 +97,6 @@ document.querySelectorAll('.chip').forEach((chip) => {
     handleSearch();
   });
 });
-
 
 // ── Copy ──────────────────────────────────────────────────────────
 
