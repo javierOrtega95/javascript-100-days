@@ -28,6 +28,7 @@ project-name/
 | 01  | [Tinder Swipe](./01-Tinder-Swipe/)         |
 | 02  | [Arkanoid Game](./02-Arkanoid-Game/)       |
 | 03  | [Monkeytype Clone](./03-Monkeytype-Clone/) |
+| 04  | [Geo IP](./04-Geo-IP/)                     |
 
 ## Workflow
 
@@ -63,7 +64,7 @@ git push origin feat/04-project-name
 ```
 
 3. **Generate the thumbnail:**
-   - Capture the project with [shot.so](https://shot.so) — 16:9, choose a background color
+   - Capture the project with [shots.so](https://shots.so) — 16:9, choose a background color
    - Optimize with [squoosh.app](https://squoosh.app) → WebP, 400×225px, uncheck "Maintain aspect ratio"
    - Save as `assets/thumbnails/NN.webp`
 
