@@ -35,54 +35,29 @@
           </div>
         </div>
 
-        <div class="menu-bar" role="menubar">
-          <button role="menuitem">File</button>
-          <button role="menuitem">Edit</button>
-          <button role="menuitem">View</button>
-          <button role="menuitem">Image</button>
-          <button role="menuitem">Options</button>
-          <button role="menuitem">Help</button>
+        <div class="menu-bar">
+          <button>File</button>
+          <button>Edit</button>
+          <button>View</button>
+          <button>Image</button>
+          <button>Options</button>
+          <button>Help</button>
         </div>
 
         <aside class="paint-tools">
-          <nav
-            class="paint-tools__grid"
-            role="toolbar"
-            aria-label="Drawing tools"
-          >
-            <button
-              class="tool-btn active"
-              data-tool="draw"
-              title="Pencil"
-            ></button>
-
-            <button class="tool-btn" data-tool="erase" title="Eraser"></button>
-
-            <button class="tool-btn" data-tool="fill" title="Fill"></button>
-
-            <button
-              class="tool-btn"
-              data-tool="picker"
-              title="Color Picker"
-            ></button>
-
-            <button
-              class="tool-btn"
-              data-tool="rectangle"
-              title="Rectangle"
-            ></button>
-
-            <button
-              class="tool-btn"
-              data-tool="ellipse"
-              title="Ellipse"
-            ></button>
+          <nav class="paint-tools__grid" role="toolbar" aria-label="Drawing tools">
+            <button class="tool-btn active" data-tool="draw"      aria-label="Pencil"       title="Pencil"></button>
+            <button class="tool-btn"        data-tool="erase"     aria-label="Eraser"       title="Eraser"></button>
+            <button class="tool-btn"        data-tool="fill"      aria-label="Fill"         title="Fill"></button>
+            <button class="tool-btn"        data-tool="picker"    aria-label="Color Picker" title="Color Picker"></button>
+            <button class="tool-btn"        data-tool="rectangle" aria-label="Rectangle"    title="Rectangle"></button>
+            <button class="tool-btn"        data-tool="ellipse"   aria-label="Ellipse"      title="Ellipse"></button>
           </nav>
 
           <div class="paint-tools__sep"></div>
 
-          <button class="tool-btn" id="clear-btn" title="Clear canvas"></button>
-          <button class="tool-btn" id="save-btn" title="Save PNG"></button>
+          <button class="tool-btn" id="clear-btn" aria-label="Clear canvas" title="Clear canvas"></button>
+          <button class="tool-btn" id="save-btn"  aria-label="Save PNG"     title="Save PNG"></button>
         </aside>
 
         <main class="paint-main">
@@ -95,7 +70,7 @@
 
             <div class="color-display__fg" id="color-fg"></div>
 
-            <input type="color" id="color-picker" value="#000000" />
+            <input type="color" id="color-picker" value="#000000" aria-label="Select drawing color" />
           </div>
 
           <div class="paint-footer__divider"></div>
