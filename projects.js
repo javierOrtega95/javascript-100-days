@@ -36,4 +36,14 @@ export const projects = [
     code: 'https://github.com/javierOrtega95/javascript-100-days/tree/main/04-Geo-IP',
     thumbnail: './assets/thumbnails/04.webp',
   },
+  {
+    id: '05',
+    title: 'Paint App',
+    description:
+      'Canvas drawing app with multiple tools, color palette and shape preview.',
+    tags: ['Canvas API', 'CSS Grid', 'Drawing'],
+    demo: './05-Paint-App/',
+    code: 'https://github.com/javierOrtega95/javascript-100-days/tree/main/05-Paint-App',
+    thumbnail: './assets/thumbnails/05.webp',
+  },
 ];
