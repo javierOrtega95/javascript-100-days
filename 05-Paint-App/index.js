@@ -55,6 +55,10 @@ function initCanvas() {
   const main = document.querySelector('.paint-main');
   canvas.width = main.clientWidth - 16; // 8px padding each side
   canvas.height = main.clientHeight - 16;
+
+  // Fill with white so clearRect and PNG export have a white background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 window.addEventListener('load', initCanvas);
@@ -74,10 +78,13 @@ document.querySelectorAll('[data-tool]').forEach((btn) => {
   btn.addEventListener('click', () => activateTool(btn.dataset.tool));
 });
 
+activateTool(currentTool);
+
 // ── Actions ──────────────────────────────────────────────────────
 
 document.getElementById('clear-btn').addEventListener('click', () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 });
 
 document.getElementById('save-btn').addEventListener('click', () => {
@@ -286,14 +293,18 @@ const DRAW_HANDLERS = {
 canvas.addEventListener('mousedown', (e) => {
   const { x, y } = getPos(e);
 
+  // Clamp to valid pixel range to avoid out-of-bounds reads in getImageData
+  const px = Math.max(0, Math.min(canvas.width - 1, Math.floor(x)));
+  const py = Math.max(0, Math.min(canvas.height - 1, Math.floor(y)));
+
   if (currentTool === 'fill') {
-    floodFill(Math.floor(x), Math.floor(y));
+    floodFill(px, py);
 
     return;
   }
 
   if (currentTool === 'picker') {
-    pickColor(x, y);
+    pickColor(px, py);
 
     return;
   }
@@ -303,7 +314,11 @@ canvas.addEventListener('mousedown', (e) => {
   startY = y;
 
   applyStyle();
-  snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  // Snapshot only needed for shape tools that redraw the canvas on each mousemove
+  if (currentTool === 'rectangle' || currentTool === 'ellipse') {
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  }
 
   if (currentTool === 'draw' || currentTool === 'erase') {
     // Paint a dot at the click point so single clicks leave a mark
