@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>100 days of JavaScript · 05 - Paint App</title>
+    <link rel="stylesheet" href="../shared.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav class="site-nav">
+      <a class="site-nav__logo" href="../">
+        <span class="site-nav__number">100</span>
+        <span class="site-nav__badge">JS</span>
+        <span class="site-nav__label">days</span>
+      </a>
+      <p class="site-nav__project">#05 · Paint App</p>
+      <a class="site-nav__back" href="../">← Back to home</a>
+    </nav>
+
+    <div class="paint-wrap">
+      <div class="paint-app">
+        <div class="title-bar">
+          <div class="title-bar__left">
+            <img class="title-bar__icon" src="./icon.png" alt="" />
+
+            <span>Paint.js</span>
+          </div>
+
+          <div class="title-bar__btns">
+            <button aria-label="Minimize">&#x2013;</button>
+            <button aria-label="Maximize">&#x25A1;</button>
+            <button aria-label="Close">&#x2715;</button>
+          </div>
+        </div>
+
+        <div class="menu-bar" role="menubar">
+          <button role="menuitem">File</button>
+          <button role="menuitem">Edit</button>
+          <button role="menuitem">View</button>
+          <button role="menuitem">Image</button>
+          <button role="menuitem">Options</button>
+          <button role="menuitem">Help</button>
+        </div>
+
+        <aside class="paint-tools">
+          <nav
+            class="paint-tools__grid"
+            role="toolbar"
+            aria-label="Drawing tools"
+          >
+            <button
+              class="tool-btn active"
+              data-tool="draw"
+              title="Pencil"
+            ></button>
+
+            <button class="tool-btn" data-tool="erase" title="Eraser"></button>
+
+            <button class="tool-btn" data-tool="fill" title="Fill"></button>
+
+            <button
+              class="tool-btn"
+              data-tool="picker"
+              title="Color Picker"
+            ></button>
+
+            <button
+              class="tool-btn"
+              data-tool="rectangle"
+              title="Rectangle"
+            ></button>
+
+            <button
+              class="tool-btn"
+              data-tool="ellipse"
+              title="Ellipse"
+            ></button>
+          </nav>
+
+          <div class="paint-tools__sep"></div>
+
+          <button class="tool-btn" id="clear-btn" title="Clear canvas"></button>
+          <button class="tool-btn" id="save-btn" title="Save PNG"></button>
+        </aside>
+
+        <main class="paint-main">
+          <canvas id="canvas"></canvas>
+        </main>
+
+        <footer class="paint-footer">
+          <div class="color-display">
+            <div class="color-display__bg"></div>
+
+            <div class="color-display__fg" id="color-fg"></div>
+
+            <input type="color" id="color-picker" value="#000000" />
+          </div>
+
+          <div class="paint-footer__divider"></div>
+
+          <div
+            class="paint-footer__swatches"
+            role="group"
+            aria-label="Color palette"
+          ></div>
+
+          <div class="paint-footer__size">
+            <label for="size-range">Size</label>
+
+            <input type="range" id="size-range" min="1" max="50" value="4" />
+
+            <span id="size-label">4</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
