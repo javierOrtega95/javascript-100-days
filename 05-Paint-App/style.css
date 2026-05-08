@@ -1,0 +1,374 @@
+/* ── Win95 variables ───────────────────────────────────────────── */
+
+:root {
+  --w: #c0c0c0; /* silver */
+  --l1: #dfdfdf;
+  --l2: #ffffff;
+  --d1: #808080;
+  --d2: #000000;
+  --blue: #000080;
+  --blue2: #1084d0;
+  --font: Arial, sans-serif;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Body ──────────────────────────────────────────────────────── */
+
+body {
+  height: 100dvh;
+  overflow: hidden;
+  background: #0d1117;
+  font-family: var(--font);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+/* ── Paint wrapper ─────────────────────────────────────────────── */
+
+.paint-wrap {
+  width: 100%;
+  max-width: 1180px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Paint app — CSS grid ────────────────────── */
+
+.paint-app {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-areas:
+    'titlebar titlebar'
+    'menubar  menubar'
+    'aside    main'
+    'footer   footer';
+  grid-template-columns: 56px 1fr;
+  grid-template-rows: 20px auto 1fr auto;
+  background: var(--w);
+  /* Win95 raised window border */
+  box-shadow:
+    inset -1px -1px var(--d2),
+    inset 1px 1px var(--l2),
+    inset -2px -2px var(--d1),
+    inset 2px 2px var(--l1);
+}
+
+/* ── Title bar ─────────────────────────────────────────────────── */
+
+.title-bar {
+  grid-area: titlebar;
+  background: linear-gradient(to right, var(--blue), var(--blue2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 3px;
+  user-select: none;
+}
+
+.title-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.title-bar__icon {
+  width: 14px;
+  height: 14px;
+  image-rendering: pixelated;
+}
+
+.title-bar__btns {
+  display: flex;
+  gap: 2px;
+}
+
+.title-bar__btns button {
+  width: 16px;
+  height: 14px;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1;
+  background: var(--w);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset -1px -1px var(--d2),
+    inset 1px 1px var(--l2),
+    inset -2px -2px var(--d1),
+    inset 2px 2px var(--l1);
+}
+
+.title-bar__btns button:active {
+  box-shadow:
+    inset 1px 1px var(--d2),
+    inset -1px -1px var(--l2),
+    inset 2px 2px var(--d1),
+    inset -2px -2px var(--l1);
+}
+
+/* ── Menu bar ──────────────────────────────────────────────────── */
+
+.menu-bar {
+  grid-area: menubar;
+  display: flex;
+  padding: 1px 2px;
+  border-bottom: 1px solid var(--d1);
+  border-top: 1px solid var(--l2);
+}
+
+.menu-bar button {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 2px 8px;
+  font-family: var(--font);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.menu-bar button:hover {
+  background: var(--blue);
+  color: var(--l2);
+}
+
+/* ── Aside — tools ─────────────────────────────────────────────── */
+
+.paint-tools {
+  grid-area: aside;
+  background: var(--w);
+  border-right: 1px solid var(--d1);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.paint-tools__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+}
+
+.tool-btn {
+  width: 24px;
+  height: 24px;
+  background-color: var(--w);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  image-rendering: pixelated;
+  box-shadow:
+    inset -1px -1px var(--d2),
+    inset 1px 1px var(--l2),
+    inset -2px -2px var(--d1),
+    inset 2px 2px var(--l1);
+}
+
+.tool-btn:active,
+.tool-btn.active {
+  box-shadow:
+    inset 1px 1px var(--d2),
+    inset -1px -1px var(--l2),
+    inset 2px 2px var(--d1),
+    inset -2px -2px var(--l1);
+  background-color: #b0b0b0;
+}
+
+.paint-tools__sep {
+  width: 48px;
+  height: 2px;
+  box-shadow:
+    inset 0 1px var(--d1),
+    inset 0 2px var(--l2);
+  margin: 2px 0;
+}
+
+/* Icon backgrounds */
+[data-tool='draw'] {
+  background-image: url('./icons/draw.png');
+}
+[data-tool='erase'] {
+  background-image: url('./icons/erase.png');
+}
+[data-tool='fill'] {
+  background-image: url('./icons/fill.png');
+}
+[data-tool='picker'] {
+  background-image: url('./icons/picker.png');
+}
+[data-tool='rectangle'] {
+  background-image: url('./icons/rectangle.png');
+}
+[data-tool='ellipse'] {
+  background-image: url('./icons/ellipse.png');
+}
+#clear-btn {
+  background-image: url('./icons/trash.png');
+  background-size: 18px;
+}
+#save-btn {
+  background-image: url('./icons/save.png');
+}
+
+/* ── Main — canvas area ────────────────────────────────────────── */
+
+.paint-main {
+  grid-area: main;
+  background: var(--w);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#canvas {
+  display: block;
+  background: #ffffff;
+  cursor: crosshair;
+  /* Win95 sunken border */
+  box-shadow:
+    inset 1px 1px var(--d2),
+    inset -1px -1px var(--l2),
+    inset 2px 2px var(--d1),
+    inset -2px -2px var(--l1);
+}
+
+/* ── Footer — colors ───────────────────────────────────────────── */
+
+.paint-footer {
+  grid-area: footer;
+  background: var(--w);
+  border-top: 1px solid var(--d1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+}
+
+/* Foreground over background color boxes */
+.color-display {
+  position: relative;
+  width: 36px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.color-display__bg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 22px;
+  background: #ffffff;
+  box-shadow:
+    inset 1px 1px var(--d2),
+    inset -1px -1px var(--l2),
+    inset 2px 2px var(--d1),
+    inset -2px -2px var(--l1);
+}
+
+.color-display__fg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 22px;
+  background: #000000;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow:
+    inset -1px -1px var(--d2),
+    inset 1px 1px var(--l2),
+    inset -2px -2px var(--d1),
+    inset 2px 2px var(--l1);
+}
+
+#color-picker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 22px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+  border: none;
+}
+
+.paint-footer__divider {
+  align-self: stretch;
+  width: 0;
+  border-left: 1px solid var(--d1);
+  border-right: 1px solid var(--l2);
+  margin: 0 2px;
+}
+
+.paint-footer__swatches {
+  display: grid;
+  grid-template-columns: repeat(14, 16px);
+  grid-template-rows: repeat(2, 16px);
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--d2);
+  cursor: pointer;
+}
+
+.swatch:hover {
+  outline: 1px solid var(--l2);
+  outline-offset: -2px;
+}
+
+.swatch.active {
+  outline: 2px solid var(--l2);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.paint-footer__size {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.paint-footer__size label {
+  font-size: 11px;
+}
+
+.paint-footer__size input[type='range'] {
+  width: 80px;
+}
+
+.paint-footer__size span {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  min-width: 20px;
+}
